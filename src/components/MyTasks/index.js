@@ -50,34 +50,33 @@ const tagsList = [
 
 class MyTasks extends Component {
   state = {
-    currentList: [],
-    textInput: '',
-    tagText: tagsList[0].optionId,
+    taskList: [],
+    input: '',
+    tag: tagsList[0].optionId,
     activeTag: 'INITIAL',
   }
 
   onAdd = () => {
-    const {textInput, tagText} = this.state
+    const {input, tag} = this.state
     const id = v4()
-    const value = textInput
-    const text = tagText
-    const bgColor = false
+    const name = input
+    const category = tag
 
-    if (textInput.length !== 0) {
+    if (name.length !== 0) {
       this.setState(prevState => ({
-        currentList: [...prevState.currentList, {id, value, text, bgColor}],
-        textInput: '',
-        tagText: tagsList[0].optionId,
+        taskList: [...prevState.taskList, {id, name, category}],
+        input: '',
+        tag: tagsList[0].optionId,
       }))
     }
   }
 
   onChangeText = event => {
-    this.setState({textInput: event.target.value})
+    this.setState({input: event.target.value})
   }
 
   onChangeOption = event => {
-    this.setState({tagText: event.target.value})
+    this.setState({tag: event.target.value})
   }
 
   onClickTaskTag = event => {
@@ -96,11 +95,11 @@ class MyTasks extends Component {
   )
 
   render() {
-    const {tagsText, currentList, textInput, activeTag} = this.state
+    const {tag, taskList, input, activeTag} = this.state
     const filteredList =
       activeTag === 'INITIAL'
-        ? currentList
-        : currentList.filter(each => each.text === activeTag)
+        ? taskList
+        : taskList.filter(each => each.category === activeTag)
     return (
       <MainDiv>
         <FirstDiv>
@@ -108,24 +107,23 @@ class MyTasks extends Component {
           <LabelInputDiv>
             <Label htmlFor="label-input">Task</Label>
             <Input
-              type="text"
               id="label-input"
+              type="text"
               placeholder="Enter the task here"
+              value={input}
               onChange={this.onChangeText}
-              value={textInput}
             />
           </LabelInputDiv>
           <LabelInputDiv>
             <Label htmlFor="label-options">Tags</Label>
             <Select
-              name="tags"
               id="label-options"
+              value={tag}
               onChange={this.onChangeOption}
-              value={tagsText}
             >
-              {tagsList.map(eachItem => (
-                <option value={eachItem.optionId}>
-                  {eachItem.displayText}
+              {tagsList.map(eachTag => (
+                <option key={eachTag.optionId} value={eachTag.optionId}>
+                  {eachTag.displayText}
                 </option>
               ))}
             </Select>
@@ -139,17 +137,17 @@ class MyTasks extends Component {
         <SecondDiv>
           <SecondDivHead>Tags</SecondDivHead>
           <TagsUl>
-            {tagsList.map(eachItem => {
-              const isActive = activeTag === eachItem.optionId
+            {tagsList.map(eachTag => {
+              const isActive = activeTag === eachTag.optionId
               return (
-                <TagsLi key={eachItem.optionId}>
+                <TagsLi key={eachTag.optionId}>
                   <TagsButton
-                    value={eachItem.optionId}
                     type="button"
+                    value={eachTag.optionId}
                     onClick={this.onClickTaskTag}
                     isActive={isActive}
                   >
-                    {eachItem.displayText}
+                    {eachTag.displayText}
                   </TagsButton>
                 </TagsLi>
               )
@@ -160,8 +158,8 @@ class MyTasks extends Component {
             this.renderNoTasks()
           ) : (
             <TasksUl>
-              {currentList.map(eachItem => (
-                <MyTasksItem key={eachItem.id} taskDetails={eachItem} />
+              {filteredList.map(eachTask => (
+                <MyTasksItem key={eachTask.optionId} taskDetails={eachTask} />
               ))}
             </TasksUl>
           )}

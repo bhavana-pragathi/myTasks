@@ -1,13 +1,21 @@
-import {TasksLi, TaskName, TaskButton, TaskDiv} from './styledComponents'
+import {
+  TasksLi,
+  TaskName,
+  TaskButtonDiv,
+  TaskDiv,
+  TaskPara,
+} from './styledComponents'
 
 const MyTasksItem = props => {
   const {taskDetails} = props
-  const {value, text} = taskDetails
+  const {name, category} = taskDetails
   return (
     <TasksLi>
       <TaskDiv>
-        <TaskName>{value}</TaskName>
-        <TaskButton>{text}</TaskButton>
+        <TaskName>{name}</TaskName>
+        <TaskButtonDiv>
+          <TaskPara>{category}</TaskPara>
+        </TaskButtonDiv>
       </TaskDiv>
     </TasksLi>
   )

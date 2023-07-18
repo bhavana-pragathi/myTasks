@@ -15,12 +15,18 @@ export const TaskName = styled.p`
   color: #ffffff;
   margin-left: 20px;
 `
-export const TaskButton = styled.button`
+export const TaskButtonDiv = styled.div`
   background-color: #f3aa4e;
   border: none;
   border-radius: 12px;
-  color: #000000;
   height: 25px;
-  font-size: 12px;
   margin-right: 20px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+`
+export const TaskPara = styled.p`
+  font-size: 10px;
+  color: #000000;
+  font-weight: bold;
 `

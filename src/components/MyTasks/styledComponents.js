@@ -4,6 +4,7 @@ export const MainDiv = styled.div`
   display: flex;
   background-color: #000000;
   height: 100vh;
+  font-family: 'Roboto';
 `
 export const FirstDiv = styled.form`
   width: 40vw;
@@ -37,7 +38,6 @@ export const ButtonDiv = styled.div`
 `
 export const AddTaskButton = styled.button`
   background-color: #f3aa4e;
-  color: #ffffff;
   border: none;
   border-radius: 5px;
   height: 30px;
@@ -64,7 +64,7 @@ export const TagsLi = styled.li`
 `
 export const TagsButton = styled.button`
   border-radius: 12px;
-  background-color: ${props => (props.isActive ? '#f3aa4e' : 'transparent')}
+  background-color: ${props => (props.isActive ? '#f3aa4e' : 'transparent')};
   font-size: 12px;
   color: #ffffff;
   border-width: 1px;
@@ -81,6 +81,6 @@ export const SecondTaskHead1 = styled.p`
   margin-top: 200px;
   color: #ffffff;
   text-align: center;
-  margin-left: 300px;
+  margin-left: 100px;
 `
 export const TasksUl = styled.ul``
